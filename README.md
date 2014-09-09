@@ -28,14 +28,25 @@ Did you know that humans are responsible for only 39% of internet traffic? The r
 
 - RESEARCH/HOMEWORK
 
-    - Research package manager "pip"
+    - Install "pip"
+
+    `curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo python2.7`
+
     - Install BeautifulSoup using "pip"
 
-    See docs here: [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+    `sudo pip install beautifulsoup4`
+
+    - See docs here: [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 - Meeting 2: Over The Wire
 
-- Meeting 3: Automated Data Gathering
+- Meeting 3: Over The Wire II
+
+    - PUT Requests
+        - Cross Site Request Forgery
+    - How Google works, intro to robots.txt
+    - HTML/XML Review
+    - Automated Craigslist scraper
 
 
 ##Setup
