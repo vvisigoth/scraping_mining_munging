@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 import sys, urllib2, json
 
 from pprint import pprint as pretty_print
@@ -14,7 +13,10 @@ USER_AGENT_STRING = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_5) AppleWebKit/
 def make_url(query_term):
 
     params = {
-        "query": query_term
+        "query": query_term,
+        "sort": "date",
+        "hasPic": 1,
+        "srchType": "T"
     }
 
     param_string = urlencode(params)
@@ -32,14 +34,43 @@ def send_request(url, user_agent_string):
 
     return data
 
+def get_rows(html):
+
+    pretty_html = bsoup(html)
+
+    rows = pretty_html.find_all("p", class_="row")
+
+    return rows
+
+def get_info(row):
+
+    price = row.find("span", class_="price").string
+
+    date = row.find("span", class_="date").string
+
+    output = {
+        "price": price,
+        "date": date
+    }
+
+    return output
+
 
 def main():
+    url = make_url("Dining Room chairs")
 
-    url = make_url("Dining Room Chairs")
+    ugly_html = send_request(url, USER_AGENT_STRING)
 
-    html = send_request(url, USER_AGENT_STRING)
+    rows = get_rows(ugly_html)
 
-    return html
+    for row in rows:
+        try:
+            pretty_print(get_info(row))
+        except Exception as e:
+            pretty_print(e)
+            
+    return
+
  
 if __name__ == '__main__':
     pretty_print(main())
